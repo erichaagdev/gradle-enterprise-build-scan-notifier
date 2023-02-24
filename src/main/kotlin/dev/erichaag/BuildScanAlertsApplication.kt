@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class DemoApplication
+class BuildScanAlertsApplication
 
 fun main(args: Array<String>) {
-  runApplication<DemoApplication>(*args)
+  runApplication<BuildScanAlertsApplication>(*args)
 }

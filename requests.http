@@ -1,0 +1,13 @@
+### Create/update policy
+PUT http://localhost:8181/v1/policies/alerts
+Content-Type: text/plain
+
+package alerts
+
+import future.keywords.if
+import future.keywords.in
+
+alert if {
+    input.attributes.environment.username == "ehaag"
+    input.attributes.hasFailed
+}

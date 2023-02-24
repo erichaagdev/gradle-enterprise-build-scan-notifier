@@ -1,0 +1,7 @@
+services:
+  opa:
+    platform: linux/x86_64
+    image: openpolicyagent/opa:0.49.2-rootless
+    ports:
+      - 8181:8181
+    command: [ "run", "--server", "--addr", ":8181" ]
