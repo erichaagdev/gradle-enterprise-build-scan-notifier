@@ -1,34 +1,35 @@
+@file:Suppress("UnstableApiUsage")
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
   id("org.springframework.boot") version "3.0.3"
-  id("io.spring.dependency-management") version "1.1.0"
-  kotlin("jvm") version "1.7.22"
-  kotlin("plugin.spring") version "1.7.22"
+  kotlin("jvm") version "1.8.10"
+  kotlin("plugin.spring") version "1.8.10"
 }
 
-group = "com.example"
+group = "dev.erichaag"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
 
-repositories {
-  mavenCentral()
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
+    vendor.set(JvmVendorSpec.ADOPTIUM)  }
 }
 
 dependencies {
+  implementation(platform(SpringBootPlugin.BOM_COORDINATES))
   implementation("org.springframework.boot:spring-boot-starter")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType<KotlinCompile>().configureEach {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "17"
   }
 }
 
-tasks.withType<Test> {
-  useJUnitPlatform()
+testing.suites.withType<JvmTestSuite>().configureEach {
+  useJUnitJupiter()
 }

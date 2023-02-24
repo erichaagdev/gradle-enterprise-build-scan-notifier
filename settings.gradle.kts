@@ -1,1 +1,41 @@
-rootProject.name = "build-scan-alert"
+@file:Suppress("UnstableApiUsage")
+
+import com.gradle.enterprise.gradleplugin.internal.extension.BuildScanExtensionWithHiddenFeatures
+
+plugins {
+  id("com.gradle.common-custom-user-data-gradle-plugin") version "1.8.2"
+  id("com.gradle.enterprise") version "3.12.3"
+  id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
+}
+
+dependencyResolutionManagement {
+  repositories {
+    mavenCentral()
+  }
+}
+
+val isCI = System.getenv().containsKey("CI")
+
+gradleEnterprise {
+  server = "https://ge.solutions-team.gradle.com"
+  buildScan {
+    capture.isTaskInputFiles = true
+    isUploadInBackground = !isCI
+    obfuscation.ipAddresses { listOf("0.0.0.0") }
+    publishAlways()
+    (this as BuildScanExtensionWithHiddenFeatures).publishIfAuthenticated()
+  }
+}
+
+buildCache {
+  local {
+    isEnabled = true
+  }
+
+  remote(gradleEnterprise.buildCache) {
+    isEnabled = true
+    isPush = isCI
+  }
+}
+
+rootProject.name = "build-scan-alerts"
