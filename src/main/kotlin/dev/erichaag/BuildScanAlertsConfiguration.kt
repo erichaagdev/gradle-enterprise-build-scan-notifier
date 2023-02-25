@@ -1,5 +1,6 @@
 package dev.erichaag
 
+import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.client.WebClient
@@ -24,4 +25,9 @@ class BuildScanAlertsConfiguration {
   }
 
   private fun String.base64() = Base64.getEncoder().encodeToString(encodeToByteArray())
+
+  @Bean
+  fun helloPrinter(helloProperties: HelloProperties) = ApplicationRunner {
+    println(helloProperties.hello)
+  }
 }
