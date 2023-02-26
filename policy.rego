@@ -18,6 +18,7 @@ alerts contains alert if {
         "message": sprintf(messages[rand.intn("", count(messages))], [input.link])
     }
 }
+
 alerts contains alert if {
 	input.build.buildToolType == "gradle"
 	input.attributes.buildOptions.daemonEnabled == false
