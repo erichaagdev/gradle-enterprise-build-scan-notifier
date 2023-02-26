@@ -10,12 +10,6 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
 }
 
-dependencyResolutionManagement {
-  repositories {
-    mavenCentral()
-  }
-}
-
 val isCI = System.getenv().containsKey("CI")
 
 gradleEnterprise {
@@ -40,6 +34,7 @@ buildCache {
   }
 }
 
+include("build-scan-alerts-server")
 include("gradle-enterprise-api-models")
 
 rootProject.name = "build-scan-alerts"
