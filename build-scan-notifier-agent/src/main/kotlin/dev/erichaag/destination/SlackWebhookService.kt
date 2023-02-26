@@ -16,7 +16,7 @@ class SlackWebhookService(
     client = webClientBuilder.baseUrl(properties.webhookUrl.toString()).build()
   }
 
-  override fun sendAlert(message: String) =
+  override fun sendNotification(message: String) =
     client
       .post()
       .contentType(MediaType.APPLICATION_JSON)

@@ -5,6 +5,6 @@ import reactor.core.publisher.Mono
 
 interface PolicyService {
 
-  fun getAlerts(buildScan: BuildScan): Mono<Set<PolicyDecision>>
+  fun getNotifications(buildScan: BuildScan): Mono<Set<Notification>>
 
 }

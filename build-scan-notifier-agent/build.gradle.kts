@@ -13,15 +13,15 @@ plugins {
 group = "dev.erichaag"
 version = "0.0.1"
 
-repositories {
-  mavenCentral()
-}
-
 java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(17))
     vendor.set(JvmVendorSpec.ADOPTIUM)
   }
+}
+
+repositories {
+  mavenCentral()
 }
 
 dependencies {

@@ -4,9 +4,6 @@ notifier:
       ge-solutions:
         access-key: abcdefghijklmnopqrstuvwxyz
         server-url: https://ge.solutions-team.gradle.com
-  policy:
-    open-policy-agent:
-      agent-url: http://localhost:8181
   destinations:
     slack-webhook:
       testing-server:

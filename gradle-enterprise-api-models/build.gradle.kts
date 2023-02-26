@@ -3,6 +3,13 @@ plugins {
   id("org.openapi.generator") version "6.4.0"
 }
 
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
+    vendor.set(JvmVendorSpec.ADOPTIUM)
+  }
+}
+
 repositories {
   exclusiveContent {
     forRepository {
@@ -28,7 +35,6 @@ dependencies {
 
 openApiGenerate {
   generatorName.set("java")
-  inputSpec.set(layout.projectDirectory.file("gradle-enterprise-2022.4-api.yaml").asFile.absolutePath)
   inputSpec.set(providers.provider { apiSpecification.singleFile.absolutePath })
   outputDir.set(layout.buildDirectory.file("generated/openapi").map { it.asFile.absolutePath })
   modelPackage.set("com.gradle.enterprise.model")
