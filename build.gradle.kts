@@ -25,10 +25,13 @@ dependencies {
   implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.0.3")
-  kapt("org.springframework.boot:spring-boot-configuration-processor:3.0.3")
+  kapt("org.springframework.boot:spring-boot-configuration-processor:3.0.3") {
+    because("https://github.com/spring-projects/spring-boot/issues/28046")
+  }
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+  implementation("org.apache.commons:commons-text:1.10.0")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
 
@@ -80,4 +83,8 @@ sourceSets {
       srcDir(processOpenApiGenerate)
     }
   }
+}
+
+tasks.processResources.configure {
+  from(layout.projectDirectory.file("policy.rego"))
 }

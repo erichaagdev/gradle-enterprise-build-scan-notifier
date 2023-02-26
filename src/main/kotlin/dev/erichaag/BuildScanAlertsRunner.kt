@@ -1,37 +1,44 @@
 package dev.erichaag
 
-import dev.erichaag.model.Build
-import dev.erichaag.model.ExportApiBuild
+import dev.erichaag.destination.DestinationServiceRegistry
+import dev.erichaag.policy.OpenPolicyAgentPolicyService
+import dev.erichaag.policy.PolicyDecision
+import dev.erichaag.policy.PolicyService
+import dev.erichaag.source.SourceServiceRegistry
+import org.springframework.beans.factory.DisposableBean
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
+import reactor.core.Disposable
 import reactor.core.publisher.Mono
-import reactor.kotlin.core.util.function.component1
-import reactor.kotlin.core.util.function.component2
-import reactor.util.function.Tuple2
+import java.time.Duration
 
 @Component
 class BuildScanAlertsRunner(
-  private val client: GradleEnterpriseApiClient,
-  private val policyClient: OpenPolicyAgentClient,
-  private val action: BuildScanAlertAction,
-) : ApplicationRunner {
+  private val sourceServices: SourceServiceRegistry,
+  private val policyService: PolicyService,
+  private val destinationServices: DestinationServiceRegistry,
+) : ApplicationRunner, DisposableBean {
+
+  private var disposables: Set<Disposable> = setOf()
 
   override fun run(args: ApplicationArguments) {
-    client.stream().flatMap(this::processBuild)
-      .filterWhen { (build, attributes) -> policyClient.shouldAlert(build, attributes) }
-      .doOnNext { (build, attributes) -> action.alert(build, attributes) }
-      .subscribe()
+    if (policyService is OpenPolicyAgentPolicyService) {
+      policyService.loadPolicyFromClasspath().block(Duration.ofSeconds(10))
+    }
+    disposables = sourceServices.sources.map { source ->
+      source
+        .emitBuildScans()
+        .flatMap { policyService.getAlerts(it) }
+        .flatMapIterable { it }
+        .flatMap(this::sendAlert)
+        .subscribe()
+    }.toSet()
   }
 
-  private fun processBuild(build: ExportApiBuild): Mono<Tuple2<Build, Any>> {
-    val buildResponse = client.getBuild(build.buildId)
-    return if (build.isGradle()) {
-      buildResponse.zipWith(client.getGradleAttributes(build.buildId))
-    } else if (build.isMaven()) {
-      buildResponse.zipWith(client.getMavenAttributes(build.buildId))
-    } else {
-      Mono.empty()
-    }
-  }
+  private fun sendAlert(alert: PolicyDecision) =
+    destinationServices.destinations[alert.destination]?.sendAlert(alert.message) ?: Mono.empty()
+
+  override fun destroy() = disposables.forEach { it.dispose() }
+
 }
