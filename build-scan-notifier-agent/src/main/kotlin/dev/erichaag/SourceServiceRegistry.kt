@@ -1,6 +1,5 @@
-package dev.erichaag.source
+package dev.erichaag
 
-import dev.erichaag.NotifierAgentProperties
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -13,7 +12,7 @@ class SourceServiceRegistry(
   final val sources: Set<SourceService>
 
   init {
-    sources = properties.sources.exportApi.values.map { ExportApiSourceService(it, webClientBuilder) }.toSet()
+    sources = properties.exportApi.sources.values.map { ExportApiSourceService(it, webClientBuilder) }.toSet()
   }
 
 }

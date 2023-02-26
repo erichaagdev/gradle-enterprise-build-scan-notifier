@@ -1,12 +1,12 @@
-package dev.erichaag.destination
+package dev.erichaag
 
-import dev.erichaag.NotifierAgentProperties.SlackWebhookProperties
+import dev.erichaag.SlackProperties.SlackDestination
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 
-class SlackWebhookService(
-  properties: SlackWebhookProperties,
+class SlackDestinationService(
+  properties: SlackDestination,
   webClientBuilder: WebClient.Builder,
 ) : DestinationService {
 

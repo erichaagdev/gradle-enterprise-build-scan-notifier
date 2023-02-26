@@ -1,4 +1,4 @@
-package dev.erichaag.destination
+package dev.erichaag
 
 import reactor.core.publisher.Mono
 

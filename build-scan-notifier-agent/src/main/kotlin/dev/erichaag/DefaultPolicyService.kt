@@ -1,6 +1,5 @@
-package dev.erichaag.policy
+package dev.erichaag
 
-import dev.erichaag.BuildScan
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 

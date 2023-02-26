@@ -1,10 +1,9 @@
-package dev.erichaag.source
+package dev.erichaag
 
 import com.gradle.enterprise.model.Build
 import com.gradle.enterprise.model.GradleAttributes
 import com.gradle.enterprise.model.MavenAttributes
-import dev.erichaag.BuildScan
-import dev.erichaag.NotifierAgentProperties.ExportApiProperties
+import dev.erichaag.ExportApiProperties.ExportApiSource
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToFlux
 import org.springframework.web.reactive.function.client.bodyToMono
@@ -15,7 +14,7 @@ import java.net.URI
 import java.util.Base64
 
 class ExportApiSourceService(
-  properties: ExportApiProperties,
+  properties: ExportApiSource,
   webClientBuilder: WebClient.Builder,
 ) : SourceService {
 

@@ -1,6 +1,5 @@
-package dev.erichaag.destination
+package dev.erichaag
 
-import dev.erichaag.NotifierAgentProperties
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -13,8 +12,8 @@ class DestinationServiceRegistry(
   final val destinations: Map<String, DestinationService>
 
   init {
-    destinations = properties.destinations.slackWebhook.mapValues { (_, properties) ->
-      SlackWebhookService(properties, webClientBuilder)
+    destinations = properties.slack.destinations.mapValues { (_, properties) ->
+      SlackDestinationService(properties, webClientBuilder)
     }
   }
 

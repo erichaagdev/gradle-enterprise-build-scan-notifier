@@ -1,10 +1,10 @@
 notifier:
-  sources:
-    export-api:
+  export-api:
+    sources:
       ge-solutions:
         access-key: abcdefghijklmnopqrstuvwxyz
         server-url: https://ge.solutions-team.gradle.com
-  destinations:
-    slack-webhook:
+  slack:
+    destinations:
       testing-server:
         webhook-url: https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/QRSTUVWXYZ

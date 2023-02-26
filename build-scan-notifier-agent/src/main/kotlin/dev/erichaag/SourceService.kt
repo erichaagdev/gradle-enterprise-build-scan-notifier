@@ -1,6 +1,5 @@
-package dev.erichaag.source
+package dev.erichaag
 
-import dev.erichaag.BuildScan
 import reactor.core.publisher.Flux
 import java.net.URI
 
