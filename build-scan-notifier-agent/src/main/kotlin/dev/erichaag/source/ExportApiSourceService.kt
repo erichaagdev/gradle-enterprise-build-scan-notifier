@@ -4,7 +4,7 @@ import com.gradle.enterprise.model.Build
 import com.gradle.enterprise.model.GradleAttributes
 import com.gradle.enterprise.model.MavenAttributes
 import dev.erichaag.BuildScan
-import dev.erichaag.BuildScanAlertsProperties.ExportApiProperties
+import dev.erichaag.NotifierAgentProperties.ExportApiProperties
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToFlux
 import org.springframework.web.reactive.function.client.bodyToMono

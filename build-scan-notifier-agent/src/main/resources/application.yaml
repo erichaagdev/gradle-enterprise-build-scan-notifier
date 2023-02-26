@@ -1,4 +1,4 @@
-alert:
+notifier:
   sources:
     export-api:
       ge-solutions:

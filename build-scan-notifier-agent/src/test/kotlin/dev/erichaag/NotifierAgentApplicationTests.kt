@@ -2,7 +2,7 @@ package dev.erichaag
 
 import org.junit.jupiter.api.Test
 
-class BuildScanAlertsApplicationTests {
+class NotifierAgentApplicationTests {
 
   @Test
   fun test() {

@@ -34,7 +34,7 @@ buildCache {
   }
 }
 
-include("build-scan-alerts-server")
+include("build-scan-notifier-agent")
 include("gradle-enterprise-api-models")
 
-rootProject.name = "build-scan-alerts"
+rootProject.name = "gradle-enterprise-build-scan-notifier"

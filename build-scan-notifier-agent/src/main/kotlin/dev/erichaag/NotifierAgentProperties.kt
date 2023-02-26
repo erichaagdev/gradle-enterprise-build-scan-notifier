@@ -3,8 +3,8 @@ package dev.erichaag
 import org.springframework.boot.context.properties.ConfigurationProperties
 import java.net.URI
 
-@ConfigurationProperties("alert")
-data class BuildScanAlertsProperties(
+@ConfigurationProperties("notifier")
+data class NotifierAgentProperties(
   val sources: SourceProperties,
   val policy: PolicyProperties,
   val destinations: DestinationProperties,

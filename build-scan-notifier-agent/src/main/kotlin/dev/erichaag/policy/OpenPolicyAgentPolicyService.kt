@@ -1,7 +1,7 @@
 package dev.erichaag.policy
 
 import dev.erichaag.BuildScan
-import dev.erichaag.BuildScanAlertsProperties.OpenPolicyAgentProperties
+import dev.erichaag.NotifierAgentProperties.OpenPolicyAgentProperties
 import org.springframework.http.MediaType
 import org.springframework.util.ResourceUtils
 import org.springframework.web.reactive.function.client.WebClient

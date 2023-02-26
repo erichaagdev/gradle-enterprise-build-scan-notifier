@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono
 import java.time.Duration
 
 @Component
-class BuildScanAlertsRunner(
+class NotifierAgentRunner(
   private val sourceServices: SourceServiceRegistry,
   private val policyService: PolicyService,
   private val destinationServices: DestinationServiceRegistry,

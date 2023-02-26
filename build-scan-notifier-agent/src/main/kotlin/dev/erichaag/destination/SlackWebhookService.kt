@@ -1,6 +1,6 @@
 package dev.erichaag.destination
 
-import dev.erichaag.BuildScanAlertsProperties.SlackWebhookProperties
+import dev.erichaag.NotifierAgentProperties.SlackWebhookProperties
 import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono

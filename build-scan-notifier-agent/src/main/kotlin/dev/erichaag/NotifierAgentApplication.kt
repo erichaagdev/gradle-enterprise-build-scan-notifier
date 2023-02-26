@@ -6,8 +6,8 @@ import org.springframework.boot.runApplication
 
 @ConfigurationPropertiesScan
 @SpringBootApplication
-class BuildScanAlertsApplication
+class NotifierAgentApplication
 
 fun main(args: Array<String>) {
-  runApplication<BuildScanAlertsApplication>(*args)
+  runApplication<NotifierAgentApplication>(*args)
 }

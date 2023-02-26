@@ -1,6 +1,6 @@
 package dev.erichaag.policy
 
-import dev.erichaag.BuildScanAlertsProperties
+import dev.erichaag.NotifierAgentProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.client.WebClient.Builder
@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient.Builder
 class PolicyServiceConfiguration {
 
   @Bean
-  fun policyService(webClientBuilder: Builder, properties: BuildScanAlertsProperties): PolicyService =
+  fun policyService(webClientBuilder: Builder, properties: NotifierAgentProperties): PolicyService =
     OpenPolicyAgentPolicyService(properties.policy.openPolicyAgent, webClientBuilder)
 
 }

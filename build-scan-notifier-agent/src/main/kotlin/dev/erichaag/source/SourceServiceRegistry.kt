@@ -1,12 +1,12 @@
 package dev.erichaag.source
 
-import dev.erichaag.BuildScanAlertsProperties
+import dev.erichaag.NotifierAgentProperties
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 
 @Component
 class SourceServiceRegistry(
-  properties: BuildScanAlertsProperties,
+  properties: NotifierAgentProperties,
   webClientBuilder: WebClient.Builder,
 ) {
 
