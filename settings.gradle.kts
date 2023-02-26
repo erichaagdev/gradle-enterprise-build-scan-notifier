@@ -2,6 +2,8 @@
 
 import com.gradle.enterprise.gradleplugin.internal.extension.BuildScanExtensionWithHiddenFeatures
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 plugins {
   id("com.gradle.common-custom-user-data-gradle-plugin") version "1.8.2"
   id("com.gradle.enterprise") version "3.12.3"
@@ -37,5 +39,7 @@ buildCache {
     isPush = isCI
   }
 }
+
+include("gradle-enterprise-api-models")
 
 rootProject.name = "build-scan-alerts"

@@ -1,10 +1,10 @@
 package dev.erichaag.source
 
+import com.gradle.enterprise.model.Build
+import com.gradle.enterprise.model.GradleAttributes
+import com.gradle.enterprise.model.MavenAttributes
 import dev.erichaag.BuildScan
 import dev.erichaag.BuildScanAlertsProperties.ExportApiProperties
-import dev.erichaag.model.Build
-import dev.erichaag.model.GradleAttributes
-import dev.erichaag.model.MavenAttributes
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToFlux
 import org.springframework.web.reactive.function.client.bodyToMono
@@ -16,7 +16,7 @@ import java.util.Base64
 
 class ExportApiSourceService(
   properties: ExportApiProperties,
-  webClientBuilder: WebClient.Builder
+  webClientBuilder: WebClient.Builder,
 ) : SourceService {
 
   private val apiClient: WebClient
@@ -25,7 +25,7 @@ class ExportApiSourceService(
 
   override val serverUrl: URI
 
-    init {
+  init {
     val webClient = webClientBuilder.baseUrl(properties.serverUrl.toString()).build()
     val accessKeyBase64 = Base64.getEncoder().encodeToString(properties.accessKey.encodeToByteArray())
     apiClient = webClient.mutate().defaultHeaders { it.setBearerAuth(properties.accessKey) }.build()
