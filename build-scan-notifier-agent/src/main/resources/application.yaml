@@ -1,19 +1,13 @@
-gradle-enterprise:
-  servers:
-    ge-solutions:
-      access-key: abcdefghijklmnopqrstuvwxyz
-      server-url: https://ge.solutions-team.gradle.com
-
-slack:
-  webhooks:
-    testing-server:
-      webhook-url: https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/QRSTUVWXYZ
+spring:
+  main:
+    banner-mode: off
 
 notification:
   rules:
-    foo:
+    ci-build-failed:
       message: "The `%{projectName}` build has failed in CI.\n\nBuild Scan: %{link}"
       destinations:
-        - testing-server
+        - my-company-slack
       condition:
+        outcome: failed
         tags: [ CI ]
