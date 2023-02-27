@@ -1,10 +1,10 @@
 # Gradle Enterprise Build Scan™ Notifier
 
-Gradle Enterprise Build Scan Notifier is a standalone application that monitors Gradle Enterprise and sends a notification to Slack when a build fails. It is designed to help development teams stay informed about build failures and take action quickly to fix them.
+Gradle Enterprise Build Scan Notifier is a standalone application that monitors Gradle Enterprise and sends a notification to configured destinations when specified criteria is met. It is designed to help development teams stay informed about build failures and take action quickly to fix them.
 
-The application can be configured to monitor multiple Gradle Enterprise servers and send notifications to one or more Slack channels via webhook URLs. Notification conditions are configured using a flexible YAML-based DSL that allows you to specify when notifications should be sent and to where.
+The application can be configured to monitor multiple Gradle Enterprise servers and send notifications to one or more destinations. Notification rules are fully customizable, allowing you to specify the conditions, message, and destination of the notification.
 
-Please note that this project is in early development and all features and functionality is subject to change.
+Please note that this project is in early development and all features and functionality are subject to change.
 
 ## Installation
 
@@ -34,12 +34,18 @@ cp build-scan-notifier-agent/build/libs/build-scan-notifier-agent-0.0.1.jar ~/bu
 
 #### 4. Configure the agent
 
-The agent must be configured before it can be run. All agent properties are described in the [Configuration](#Configuration) section below. Below is the minimum required configuration to run. The configuration should be placed in an `application.properties` or `application.yaml` file in the same directory as the agent executable.
+The agent must be configured before it can be run. All agent properties are described in the [Configuration](#Configuration) section below. This is the minimum required configuration to run the agent. The configuration should be placed in an `application.yaml` file in the same directory as the agent executable.
 
-```properties
-gradle-enterprise.servers.my-company-ge.server-url=https://ge.mycompany.com
-gradle-enterprise.servers.my-company-ge.access-key=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-slack.webhooks.my-company-slack.webhook-url=https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/ABCDEFGHIJKLMNOPQRSTUVWXYZ
+```yaml
+gradle-enterprise:
+  servers:
+    my-company-ge:
+      server-url: https://ge.mycompany.com
+      access-key: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+slack:
+  webhooks:
+    my-company-slack:
+      webhook-url: https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/ABCDEFGHIJKLMNOPQRSTUVWXYZ
 ```
 
 ### 5. Run the agent
@@ -50,11 +56,13 @@ java -jar ~/build-scan-notifier-agent.jar
 
 ## Configuration
 
-The agent is configured using an `application.properties` or `application.yaml` configuration file that specifies a set of notification rules, Gradle Enterprise servers to listen to, and Slack webhook URLs to send notifications to. The configuration file must be placed in the same directory as the agent executable.
+The agent is configured using an `application.yaml` configuration file that specifies a set of notification rules, Gradle Enterprise servers to listen to, and destinations to send notifications to. The configuration file must be placed in the same directory as the agent executable.
 
-### Gradle Enterprise Servers
+While the properties file format is supported, it is not recommended due to the complexity of the configuration.
 
-The `gradle-enterprise` configuration defines a list of Gradle Enterprise servers to listen to.
+### Gradle Enterprise
+
+The `gradle-enterprise` configuration defines a set of Gradle Enterprise servers to listen to.
 
 ```yaml
 gradle-enterprise:
