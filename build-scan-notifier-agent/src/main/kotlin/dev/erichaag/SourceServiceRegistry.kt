@@ -5,14 +5,14 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @Component
 class SourceServiceRegistry(
-  properties: NotifierAgentProperties,
+  gradleEnterprise: GradleEnterpriseProperties,
   webClientBuilder: WebClient.Builder,
 ) {
 
   final val sources: Set<SourceService>
 
   init {
-    sources = properties.exportApi.sources.values.map { ExportApiSourceService(it, webClientBuilder) }.toSet()
+    sources = gradleEnterprise.servers.values.map { GradleEnterpriseSourceService(it, webClientBuilder) }.toSet()
   }
 
 }

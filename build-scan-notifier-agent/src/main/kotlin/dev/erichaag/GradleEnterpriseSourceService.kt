@@ -3,7 +3,7 @@ package dev.erichaag
 import com.gradle.enterprise.model.Build
 import com.gradle.enterprise.model.GradleAttributes
 import com.gradle.enterprise.model.MavenAttributes
-import dev.erichaag.ExportApiProperties.ExportApiSource
+import dev.erichaag.GradleEnterpriseProperties.GradleEnterpriseServer
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToFlux
 import org.springframework.web.reactive.function.client.bodyToMono
@@ -13,8 +13,8 @@ import reactor.kotlin.core.util.function.component2
 import java.net.URI
 import java.util.Base64
 
-class ExportApiSourceService(
-  properties: ExportApiSource,
+class GradleEnterpriseSourceService(
+  properties: GradleEnterpriseServer,
   webClientBuilder: WebClient.Builder,
 ) : SourceService {
 

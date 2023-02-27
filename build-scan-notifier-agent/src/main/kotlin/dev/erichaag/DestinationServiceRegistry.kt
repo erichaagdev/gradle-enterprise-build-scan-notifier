@@ -5,14 +5,14 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @Component
 class DestinationServiceRegistry(
-  properties: NotifierAgentProperties,
+  slack: SlackProperties,
   webClientBuilder: WebClient.Builder,
 ) {
 
   final val destinations: Map<String, DestinationService>
 
   init {
-    destinations = properties.slack.destinations.mapValues { (_, properties) ->
+    destinations = slack.webhooks.mapValues { (_, properties) ->
       SlackDestinationService(properties, webClientBuilder)
     }
   }

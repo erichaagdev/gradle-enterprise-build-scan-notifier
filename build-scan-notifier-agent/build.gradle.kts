@@ -35,14 +35,14 @@ dependencies {
   implementation(projects.gradleEnterpriseApiModels)
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+  implementation("org.apache.commons:commons-text:1.10.0")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
+  testImplementation("org.springframework.boot:spring-boot-starter-test")
 
   implementation(group = "io.netty", name = "netty-resolver-dns-native-macos", classifier = "osx-aarch_64") {
     because("https://github.com/netty/netty/issues/11020")
   }
-
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile>().configureEach {

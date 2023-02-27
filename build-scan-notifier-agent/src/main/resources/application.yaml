@@ -1,10 +1,19 @@
-notifier:
-  export-api:
-    sources:
-      ge-solutions:
-        access-key: abcdefghijklmnopqrstuvwxyz
-        server-url: https://ge.solutions-team.gradle.com
-  slack:
-    destinations:
-      testing-server:
-        webhook-url: https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/QRSTUVWXYZ
+gradle-enterprise:
+  servers:
+    ge-solutions:
+      access-key: abcdefghijklmnopqrstuvwxyz
+      server-url: https://ge.solutions-team.gradle.com
+
+slack:
+  webhooks:
+    testing-server:
+      webhook-url: https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/QRSTUVWXYZ
+
+notification:
+  rules:
+    foo:
+      message: "The `%{projectName}` build has failed in CI.\n\nBuild Scan: %{link}"
+      destinations:
+        - testing-server
+      condition:
+        tags: [ CI ]

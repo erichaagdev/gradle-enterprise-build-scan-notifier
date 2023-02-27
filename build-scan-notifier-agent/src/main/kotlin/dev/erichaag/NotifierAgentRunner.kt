@@ -1,5 +1,7 @@
 package dev.erichaag
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
@@ -9,10 +11,15 @@ import reactor.core.publisher.Mono
 
 @Component
 class NotifierAgentRunner(
-  private val sourceServices: SourceServiceRegistry,
-  private val policyService: PolicyService,
   private val destinationServices: DestinationServiceRegistry,
+  private val notificationService: NotificationService,
+  private val sourceServices: SourceServiceRegistry,
 ) : ApplicationRunner, DisposableBean {
+
+  companion object {
+    private val log = LoggerFactory.getLogger(NotifierAgentRunner::class.java)
+    private val objectMapper = jacksonObjectMapper().findAndRegisterModules()
+  }
 
   private var disposables: Set<Disposable> = setOf()
 
@@ -20,8 +27,8 @@ class NotifierAgentRunner(
     disposables = sourceServices.sources.map { source ->
       source
         .emitBuildScans()
-        .flatMap { policyService.getNotifications(it) }
-        .flatMapIterable { it }
+        .doOnNext { log.info(objectMapper.writeValueAsString(it)) }
+        .flatMapIterable { notificationService.getNotifications(it) }
         .flatMap(this::sendNotification)
         .subscribe()
     }.toSet()
