@@ -26,13 +26,13 @@ cd gradle-enterprise-build-scan-notifier
 ./gradlew build
 ```
 
-#### 4 Copy the agent to a new directory
+#### 4. Copy the agent to a new directory
 
 ```shell
 cp build-scan-notifier-agent/build/libs/build-scan-notifier-agent-0.0.1.jar ~/build-scan-notifier-agent.jar
 ```
 
-#### 4. Configure the agent
+#### 5. Configure the agent
 
 The agent must be configured before it can be run. All agent properties are described in the [Configuration](#Configuration) section below. This is the minimum required configuration to run the agent. The configuration should be placed in an `application.yaml` file in the same directory as the agent executable.
 
@@ -48,7 +48,7 @@ slack:
       webhook-url: https://hooks.slack.com/services/ABCDEFG/HIJKLMNOP/ABCDEFGHIJKLMNOPQRSTUVWXYZ
 ```
 
-### 5. Run the agent
+### 6. Run the agent
 
 ```shell
 java -jar ~/build-scan-notifier-agent.jar 
