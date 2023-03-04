@@ -27,8 +27,8 @@ repositories {
 dependencies {
   implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
-  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.0.3")
-  kapt("org.springframework.boot:spring-boot-configuration-processor:3.0.3") {
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.0.4")
+  kapt("org.springframework.boot:spring-boot-configuration-processor:3.0.4") {
     because("https://github.com/spring-projects/spring-boot/issues/28046")
   }
 
