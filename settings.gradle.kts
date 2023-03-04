@@ -1,7 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
-import com.gradle.enterprise.gradleplugin.internal.extension.BuildScanExtensionWithHiddenFeatures
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 plugins {
@@ -13,24 +9,12 @@ plugins {
 val isCI = System.getenv().containsKey("CI")
 
 gradleEnterprise {
-  server = "https://ge.solutions-team.gradle.com"
+  if (!providers.gradleProperty("agreeToGradleTermsOfService").orNull.toBoolean()) return@gradleEnterprise
   buildScan {
-    capture.isTaskInputFiles = true
     isUploadInBackground = !isCI
-    obfuscation.ipAddresses { listOf("0.0.0.0") }
+    termsOfServiceAgree = "yes"
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
     publishAlways()
-    (this as BuildScanExtensionWithHiddenFeatures).publishIfAuthenticated()
-  }
-}
-
-buildCache {
-  local {
-    isEnabled = true
-  }
-
-  remote(gradleEnterprise.buildCache) {
-    isEnabled = true
-    isPush = isCI
   }
 }
 
