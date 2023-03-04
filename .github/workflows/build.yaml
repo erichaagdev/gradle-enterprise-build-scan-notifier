@@ -20,4 +20,4 @@ jobs:
       - name: Build
         run: ./gradlew clean build
         env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+          ORG_GRADLE_PROJECT_agreeToGradleTermsOfService: true
