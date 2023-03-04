@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-  id("org.springframework.boot") version "3.0.3"
+  id("org.springframework.boot") version "3.0.4"
   kotlin("jvm") version "1.8.10"
   kotlin("kapt") version "1.8.10"
   kotlin("plugin.spring") version "1.8.10"
