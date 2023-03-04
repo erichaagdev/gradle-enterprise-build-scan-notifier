@@ -24,11 +24,13 @@ repositories {
   mavenCentral()
 }
 
+val springBootVersion = SpringBootPlugin.BOM_COORDINATES.substringAfterLast(":")
+
 dependencies {
   implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
-  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.0.3")
-  kapt("org.springframework.boot:spring-boot-configuration-processor:3.0.3") {
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
+  kapt("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion") {
     because("https://github.com/spring-projects/spring-boot/issues/28046")
   }
 
