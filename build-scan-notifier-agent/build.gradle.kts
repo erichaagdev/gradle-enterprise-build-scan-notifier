@@ -54,7 +54,3 @@ tasks.withType<KotlinCompile>().configureEach {
 testing.suites.withType<JvmTestSuite>().configureEach {
   useJUnitJupiter()
 }
-
-tasks.processResources.configure {
-  from(layout.projectDirectory.file("policy.rego"))
-}
