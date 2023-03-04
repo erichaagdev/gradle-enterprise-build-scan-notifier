@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-  id("org.springframework.boot") version "3.0.3"
+  id("org.springframework.boot") version "3.0.4"
   kotlin("jvm") version "1.8.10"
   kotlin("kapt") version "1.8.10"
   kotlin("plugin.spring") version "1.8.10"
@@ -24,11 +24,13 @@ repositories {
   mavenCentral()
 }
 
+val springBootVersion = SpringBootPlugin.BOM_COORDINATES.substringAfterLast(":")
+
 dependencies {
   implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
-  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.0.3")
-  kapt("org.springframework.boot:spring-boot-configuration-processor:3.0.3") {
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
+  kapt("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion") {
     because("https://github.com/spring-projects/spring-boot/issues/28046")
   }
 
