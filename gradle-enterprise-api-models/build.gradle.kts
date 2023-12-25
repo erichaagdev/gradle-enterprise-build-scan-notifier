@@ -29,7 +29,7 @@ val apiSpecification: Configuration by configurations.creating
 dependencies {
   apiSpecification("com.gradle.enterprise:gradle-enterprise-api-specification:2022.4@yaml")
 
-  api("com.fasterxml.jackson.core:jackson-annotations:2.15.2")
+  api("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
   api("jakarta.annotation:jakarta.annotation-api:2.1.1")
 }
 
