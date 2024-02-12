@@ -7,7 +7,7 @@ plugins {
   id("org.springframework.boot") version "3.2.2"
   kotlin("jvm") version "1.9.21"
   kotlin("kapt") version "1.9.22"
-  kotlin("plugin.spring") version "1.9.10"
+  kotlin("plugin.spring") version "1.9.22"
 }
 
 group = "dev.erichaag"
