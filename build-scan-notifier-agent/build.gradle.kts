@@ -6,7 +6,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 plugins {
   id("org.springframework.boot") version "3.2.3"
   kotlin("jvm") version "1.9.22"
-  kotlin("kapt") version "1.9.22"
+  kotlin("kapt") version "1.9.23"
   kotlin("plugin.spring") version "1.9.22"
 }
 
